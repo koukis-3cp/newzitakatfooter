@@ -1,0 +1,449 @@
+<?php
+
+//------------------- Custom Field -> Οι Σελίδες μου (1ο Κομμάτι του Footer-1η Στήλη) ---------------------------------------//
+?>
+<footer id="footer" class="main-footer">
+<div class="footer-row-1">
+    <section class="links top-left-side">
+        <?php
+            $urls_pages = get_field('1st_section_pages','option');
+            if( $urls_pages ): ?>
+            <ul class="links-list">
+                <?php foreach( $urls_pages as $post ): 
+                setup_postdata($post); ?>
+                <li class="links-list-item">
+                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+    </section>
+        <?php 
+        wp_reset_postdata(); ?>
+    <?php endif; 
+    
+    
+    //------------------- Custom Field -> Logo (1o Κομμάτι του Footer-2η Στήλη) ---------------------------------------//
+    
+    $image = get_field('logo_1o_kommati_tou_footer','option');
+    if( $image ):
+    
+        // Image variables.
+        $url = $image['url'];
+        $title = $image['title'];
+        $alt = $image['alt'];
+    
+        // Size attributes.
+        $size = 'large';
+        $thumb = $image['sizes'][ $size ];
+        ?>
+    <div class="footer-image">
+        <div class="footer-logo-image-container">
+            <img class="footer-logo" src="<?php echo esc_url($thumb); ?>" alt="<?php echo esc_attr($alt); ?>" />
+        </div>
+    </div>
+    <?php endif; 
+    
+    
+    
+    //------------------- Custom Field -> Τα Έργα μου (1ο Κομμάτι του Footer-3η Στήλη) ---------------------------------------//
+    
+    $terms = get_field('ta_erga_mou_1o_kommati_tou_footer', 'option');
+    
+    if( $terms ): ?>
+    <section class="links top-right-side">
+        <ul class="links-list">
+        <?php foreach( $terms as $term ): ?>
+            <li class="links-list-item">
+                <a href="/project_type/<?php echo esc_html( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></a>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </section>
+    <?php endif; 
+    
+    ?>
+</div>
+
+<div class="footer-row-2">
+    <?php 
+    //------------------- Custom Field -> Διεύθυνση 1 (2ο Κομμάτι του Footer-1η Στήλη) ---------------------------------------//
+
+    if( get_field('address_1_2ο_kommati_tou_footer','option') ): ?>
+        <?php while( the_repeater_field('address_1_2ο_kommati_tou_footer','option') ): ?>
+            
+            <?php
+            $perioxi = get_sub_field('perioxi');
+            $odos_arithmos = get_sub_field('odos_arithmos');
+            $postcode = get_sub_field('postcode');
+            $city = get_sub_field('city');
+            $phone = get_sub_field('phone');
+            $email = get_sub_field('email');
+            $fax = get_sub_field('fax');
+            ?>
+        <section class="footer-section-bottom-left">   
+            <address id="left-footer-contact-info" class="contact-info">
+                <div class="address-container">
+                <?php if( $terms ): ?>
+                    <h6 class="footer-address-area-title"><?php echo $perioxi; ?></h6>
+                <?php endif; ?>
+            
+                <?php if( $odos_arithmos ): ?>
+                    <p class="contact-info-el footer-address-number"><span class="footer-odos-value"><?php echo $odos_arithmos; ?></span><span class="comma">,</span></p>
+                <?php endif; ?>
+            
+                <?php if( $postcode ): ?>
+                    <p class="contact-info-el footer-address-postcode"><span class="footer-postcode-value"><?php echo $postcode; ?></span></p>
+                <?php endif; ?>
+            
+                <?php if( $city ): ?>
+                    <p class="contact-info-el footer-address-city"><span class="footer-city-value"><?php echo $city; ?></span></p>
+                <?php endif; ?>
+            
+                <?php if( $phone ): ?>
+                     <p class="contact-info-el footer-address-telephone"><a href="tel:<?php echo $phone; ?>"><span class="footer-phone-value"><?php echo $phone; ?></span></a></p>
+                <?php endif; ?>
+                            
+                <?php if( $email ): ?>
+                    <p class="contact-info-el footer-address-email">Email: <span class="footer-email-value"><?php echo $email; ?></span> </p>
+                <?php endif; ?>
+                
+                <?php if( $fax ): ?>
+                    <p class="contact-info-el footer-address-fax">Fax: <span class="footer-fax-value"><?php echo $fax; ?></span> </p>
+                <?php endif; ?>
+
+                </div>
+            </address>
+        </section>
+        <?php endwhile; ?>
+    <?php endif; ?>
+    <?php 
+    //------------------- Custom Field -> Διεύθυνση 2 (2ο Κομμάτι του Footer-2η Στήλη) ---------------------------------------//
+
+    if( get_field('address_2_2ο_kommati_tou_footer_copy','option') ): ?>
+        <?php while( the_repeater_field('address_2_2ο_kommati_tou_footer_copy','option') ): ?>
+            
+            <?php
+            $perioxi = get_sub_field('perioxi');
+            $odos_arithmos = get_sub_field('odos_arithmos');
+            $postcode = get_sub_field('postcode');
+            $city = get_sub_field('city');
+            $phone = get_sub_field('phone');
+            $email = get_sub_field('email');
+            $fax = get_sub_field('fax');
+        ?>
+        <section class="footer-section-bottom-center">
+            <address id="center-footer-contact-info" class="contact-info">
+            <div class="address-container">
+            <?php if( $terms ): ?>
+                <h6 class="footer-address-area-title"><?php echo $perioxi; ?></h6>
+            <?php endif; ?>
+            
+            <?php if( $odos_arithmos ): ?>
+                <p class="contact-info-el footer-address-number"><span class="footer-odos-value"><?php echo $odos_arithmos; ?></span><span class="comma">,</span></p>
+            <?php endif; ?>
+            
+            <?php if( $postcode ): ?>
+                <p class="contact-info-el footer-address-postcode"><span class="footer-postcode-value"><?php echo $postcode; ?></span></p>
+            <?php endif; ?>
+            
+            <?php if( $city ): ?>
+                <p class="contact-info-el footer-address-city"><span class="footer-city-value"><?php echo $city; ?></span></p>
+            <?php endif; ?>
+            
+            <?php if( $phone ): ?>
+                <p class="contact-info-el footer-address-telephone"><a href="tel:<?php echo $phone; ?>"><span class="footer-phone-value"><?php echo $phone; ?></span></a></p>
+            <?php endif; ?>
+            
+            <?php if( $email ): ?>
+                <p class="contact-info-el footer-address-email">Email: <span class="footer-email-value"><?php echo $email; ?></span> </p>
+            <?php endif; ?>
+            
+            <?php if( $fax ): ?>
+                <p class="contact-info-el footer-address-fax">Fax: <span class="footer-fax"><?php echo $fax; ?></span></p>
+            <?php endif; ?>
+            </div>
+            </address>
+        </section>
+        <?php endwhile; ?>
+    <?php endif; ?>
+    
+    <?php 
+    //------------------- Custom Field -> Διεύθυνση 3 (2ο Κομμάτι του Footer-3η Στήλη) ---------------------------------------//
+
+    if( get_field('address_3_2ο_kommati_tou_footer_copy2','option') ): ?>
+        <?php while( the_repeater_field('address_3_2ο_kommati_tou_footer_copy2','option') ): ?>
+            
+            <?php
+            $perioxi = get_sub_field('perioxi');
+            $odos_arithmos = get_sub_field('odos_arithmos');
+            $postcode = get_sub_field('postcode');
+            $city = get_sub_field('city');
+            $phone = get_sub_field('phone');
+            $email = get_sub_field('email');
+            $fax = get_sub_field('fax');
+            ?>
+        <section class="footer-section-bottom-right">
+            <address id="right-footer-contact-info" class="contact-info">
+            <div class="address-container">
+            <?php if( $terms ): ?>
+                <h6 class="footer-address-area-title"><?php echo $perioxi; ?></h6>
+            <?php endif; ?>
+            
+            <?php if( $odos_arithmos ): ?>
+                <p class="contact-info-el footer-address-number"><span class="footer-odos-value"><?php echo $odos_arithmos; ?></span><span class="comma">,</span></p>
+            <?php endif; ?>
+            
+            <?php if( $postcode ): ?>
+                <p class="contact-info-el footer-address-postcode"><span class="footer-postcode-value"><?php echo $postcode; ?></span></p>
+            <?php endif; ?>
+            
+            <?php if( $city ): ?>
+                <p class="contact-info-el footer-address-city"><span class="footer-city-value"><?php echo $city; ?></span></p>
+            <?php endif; ?>
+            
+            <?php if( $phone ): ?>
+                <p class="contact-info-el footer-address-telephone"><a href="tel:<?php echo $phone; ?>"><span class="footer-phone-value"><?php echo $phone; ?></span></a></p>
+            <?php endif; ?>
+            
+            <?php if( $email ): ?>
+                <p class="contact-info-el footer-address-email">Email: <span class="footer-email-value"><?php echo $email; ?></span> </p>
+            <?php endif; ?>
+            
+            <?php if( $fax ): ?>
+                <p class="contact-info-el footer-address-fax">Fax: <span class="footer-fax"><?php echo $fax; ?></span></p>
+            <?php endif; ?>
+            </div>
+            </address>
+        </section>
+        <?php endwhile; ?>
+    <?php endif; ?>
+     
+</div>
+    <?php
+        //------------------- Custom Field -> Copyright ---------------------------------------//
+
+        $copyright = get_field('copyright','option');
+    ?>
+    <?php if( $copyright ): ?>
+        <p class="copyright">© <script>document.write(new Date().getFullYear());</script> <?php echo $copyright; ?></p>
+    <?php endif; ?>
+
+</footer>
+<?php
+
+nectar_hook_before_outer_wrap_close();
+
+get_template_part( 'includes/partials/footer/off-canvas-navigation' );
+
+?>
+<?php
+
+wp_footer();
+
+?>
+
+<style>
+
+/*------------------------------------------------------------------------------------------------------------Ρυθμίσεις footer-----------------------------------------------------------------------------------------*/
+footer#footer{
+    padding-top :2%;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 100%;
+    background-color: #153B66;
+    color:white;
+}
+
+#footer a{ color:white;}
+
+
+
+/*---------------------------------------------------------------------------------------------------------- Κανόνες πρώτης γραμμής του footer--------------------------------------------------------------------------*/
+.footer-row-1 {
+    display:grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 35% 30% 35%;
+    border-bottom: solid thin #30547D;
+    padding-bottom: 2rem;
+    align-items:center;
+}
+
+#footer .links.top-left-side .links-list{
+    text-align: end;
+}
+
+/*Logo container*/
+.footer-logo-image-container{
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+/*Logo*/
+img.footer-logo{
+    width: 100%;
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+.footer-image {
+    justify-self: center;
+}
+
+.links-list-item {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+/*---------------------------------------------------------------------------------------------------------Κανόνες δεύτερης γραμμής του footer---------------------------------------------------------------------------*/
+
+.footer-row-2{
+    display:grid;
+    grid-template-rows: auto auto;
+    grid-template-columns:  1fr 24% 1fr;
+    border-bottom: solid thin #30547D;
+    font-weight:400;
+    font-size:16px;
+    font-family: "ceragr-black";
+}
+
+/* Ρυθμίσεις για Sections*/
+.footer-section-bottom-left{
+    border-right: solid thin #30547D;
+}
+    
+.footer-section-bottom-right{
+    border-left: solid thin #30547D;
+}
+
+/*Αντίστοιχες Διευθύνσεις εντός των section*/
+#left-footer-contact-info{
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+}
+
+#center-footer-contact-info{
+    padding-top:20px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    font-size: 19px;
+}
+
+#right-footer-contact-info{
+    padding-top: 20px;
+    padding-left: 10%;
+    
+}
+.contact-info.footer-address-telephone{
+    padding-bottom: 1.5em;
+}
+
+.contact-info-el {
+    font-size: 16px;
+}
+
+/*Στυλιζάρισμα τηλεφώνου*/
+#footer .contact-info.footer-address-telephone {
+    font-size:2rem;
+}
+
+.footer-phone-value{
+    border-bottom: 2px solid white;
+}
+
+/*Προσθηκη padding κάτω από την πόλη*/
+.contact-info.footer-address-city{
+    padding-bottom:2rem;
+}
+
+.footer-address-fax , .footer-address-email{
+    padding-top:0.4em;
+}
+
+ .footer-address-area-title {
+     color:#999;
+     font-size:18px;
+     padding-bottom:0.4em;
+ }
+
+.copyright{
+    text-align:center;
+    margin:7px 0;
+}
+
+/*----------------------------------------------------------------------------------- Media Queries ----------------------------------------------------------------------------------------*/
+@media screen and (max-width:600px) {
+    /*Πρώτη Γραμμή*/
+    .footer-row-1 {
+        grid-template-rows: auto auto auto;
+        grid-template-columns: 100%;
+    }
+
+    .footer-image {
+        grid-area: 1 / 1 / 2 / 2;
+        padding:20px;
+    }
+    /*Βάζει στο κέντρο όλα τα links*/
+    #ajax-content-wrap #footer .links-list {
+        text-align: center;
+        padding:20px 0;
+    }
+
+    /*Δεύτερη Γραμμή*/
+    .footer-row-2 {
+        grid-template-rows: auto auto auto;
+        grid-template-columns: 100%;
+    }
+    
+    /*Βάζει borders στο κεντρικό*/
+    .footer-section-bottom-center {
+        border-top: solid thin #30547D;
+        border-bottom: solid thin #30547D;
+    }
+    
+    .contact-info {
+        padding: 40px 0 !important;
+        text-align: center !important;
+        justify-content:center !important;
+    }
+}
+@media screen and (min-width:601px) and (max-width:1200px) {
+    .footer-row-2 {
+        grid: "main main" auto "left right" auto / 50% 50%;
+        text-align:center;
+    }
+    /*Κεντρικό*/
+    .footer-section-bottom-left{
+        grid-area: main;
+        border: none;
+        border-bottom: solid thin #30547D;
+    }
+    /*Σαλαμίνα*/
+    .footer-section-bottom-center{
+        grid-area:left;
+        margin-bottom: 40px;
+    }
+    /*Κύπρος*/
+    .footer-section-bottom-right{
+        grid-area:right;
+        border: none;
+        border-left: solid thin #30547D;
+    }
+    #left-footer-contact-info {
+        justify-content:center;
+        padding: 40px 0;
+    }
+}
+/*-----------------------------------------------------------------------------------------------Αφαίρεση default στυλ για διάφορα στοιχεία------------------------------------------------------------------------------------------*/
+    footer ul li {
+        list-style:none;
+    }
+    ul{
+        margin:0;
+    }
+    p{
+        padding:0;
+    }
+</style>
